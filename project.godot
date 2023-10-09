@@ -8,10 +8,38 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "BaseCard",
+"language": "GDScript",
+"path": "res://Scripts/BaseCard.gd"
+}, {
+"base": "Node",
+"class": "CardArtData",
+"language": "GDScript",
+"path": "res://Scripts/CardArtData.gd"
+}, {
+"base": "Node",
+"class": "CardData",
+"language": "GDScript",
+"path": "res://Scripts/CardData.gd"
+}, {
+"base": "Resource",
+"class": "DeckConfigurationResoure",
+"language": "GDScript",
+"path": "res://Scripts/DeckConfigurationResource.gd"
+} ]
+_global_script_class_icons={
+"BaseCard": "",
+"CardArtData": "",
+"CardData": "",
+"DeckConfigurationResoure": ""
+}
+
 [application]
 
 config/name="ColorChaos"
-run/main_scene="res://Scenes/Menu.tscn"
+run/main_scene="res://Scenes/Game.tscn"
 config/icon="res://icon.png"
 
 [display]
