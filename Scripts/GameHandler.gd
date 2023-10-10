@@ -60,7 +60,6 @@ func setup_cards():
 	all_cards = deck_configurator.generate_deck()
 	randomize()
 	all_cards.shuffle()
-	#print("Type: %d, Number: %s" % [all_cards[0].card_type, all_cards[0].number])
 	
 	var cards_for_player = all_cards.slice(
 		current_deck_card_index, 
@@ -86,7 +85,6 @@ func handle_card_selected(selected_card:Node):
 	var selected_card_data = selected_card.this_card_data
 	print("Card Data got = " , selected_card_data.card_type)
 	if(current_turn_state == TurnState.PLAYER_PICK):
-		print("Player has picked card")
 		var can_pick = is_picked_card_valid(selected_card_data)
 		print("Card can be picked? = ",can_pick)
 		if(can_pick):
@@ -159,7 +157,6 @@ func handle_ai_turn():
 	var did_play_card = false
 	for card in ai_cards_nodes:
 		var card_data = card.this_card_data
-		print("AI card - ", card_data.number)
 		if(is_picked_card_valid(card_data)):
 			did_play_card = true
 			handle_card_play(card, PlayerType.AI)

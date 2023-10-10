@@ -13,5 +13,4 @@ func generate_cards(cards_to_generate, parent, is_player_card = false):
 		else:
 			print("set_card_data method not found in card_instance.")
 		generated_cards.append(card_instance)
-	print("Generated cards count = ", generated_cards.size())
 	return generated_cards

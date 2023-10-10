@@ -11,7 +11,6 @@ func _ready():
 	card_art_data = $"CardArtData"
 	
 func generate_deck():
-	print("Generating Deck!")
 	for color in deck_data.card_colors:
 		generate_number_cards(color)
 		generate_special_color_cards(color)
