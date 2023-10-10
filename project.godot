@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "DeckConfigurationResoure",
 "language": "GDScript",
 "path": "res://Scripts/DeckConfigurationResource.gd"
+}, {
+"base": "Node",
+"class": "DeckConfigurator",
+"language": "GDScript",
+"path": "res://Scripts/DeckConfigurator.gd"
 } ]
 _global_script_class_icons={
 "BaseCard": "",
 "CardArtData": "",
 "CardData": "",
-"DeckConfigurationResoure": ""
+"DeckConfigurationResoure": "",
+"DeckConfigurator": ""
 }
 
 [application]

@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/GameInterface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/deck_config.tres" type="Resource" id=2]
+[ext_resource path="res://Scenes/CardArtData.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/DeckConfigurator.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node"]
 
 [node name="GameInterface" parent="." instance=ExtResource( 1 )]
 
-[node name="Card" parent="." instance=ExtResource( 2 )]
-position = Vector2( 359, 257 )
+[node name="DeckConfigurator" parent="." instance=ExtResource( 4 )]
+deck_data = ExtResource( 2 )
+
+[node name="CardArtData" parent="." instance=ExtResource( 3 )]

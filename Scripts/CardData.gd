@@ -12,20 +12,20 @@ enum CardType {
 }
 
 enum CardColors {
-	RED,
-	GREEN,
-	BLUE,
-	YELLOW
+	RED = 0,
+	GREEN = 1,
+	BLUE = 2,
+	YELLOW = 3
 }
 
 var color: Color
 var number: int = -1
 var icon: Texture = null
-var specialty: int = CardType.NONE
+var card_type: int = CardType.NONE
 
-func set_data(color_val:Color, number_val:int, icon_val:Texture, specialty_val:int):
+func set_data(color_val:Color, number_val:int, icon_val:Texture, card_type_val:int):
 	color = color_val
 	number = number_val
 	icon = icon_val
-	specialty = specialty_val
+	card_type = card_type_val
 
