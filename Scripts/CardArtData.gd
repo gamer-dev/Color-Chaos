@@ -10,6 +10,7 @@ export var card_icons : Dictionary = {
 }
 
 export var color_cards_sprites : Dictionary = {
+	CardData.CardColors.NONE: preload("res://icon.png"),
 	CardData.CardColors.RED: preload("res://icon.png"),
 	CardData.CardColors.GREEN: preload("res://icon.png"),
 	CardData.CardColors.BLUE: preload("res://icon.png"),
