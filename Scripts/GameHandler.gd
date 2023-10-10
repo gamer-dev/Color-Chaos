@@ -172,7 +172,7 @@ func draw_deck_card(player_type):
 	var new_card = all_cards[current_deck_card_index]
 	current_deck_card_index += 1
 	if(player_type == PlayerType.SELF):
-		var new_card_node = card_generator.generate_cards([new_card], player_card_holder)[0]
+		var new_card_node = card_generator.generate_cards([new_card], player_card_holder, true)[0]
 		player_cards_nodes.append(new_card_node)
 	else:
 		var new_card_node = card_generator.generate_cards([new_card], ai_card_holder)[0]
