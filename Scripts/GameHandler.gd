@@ -24,6 +24,7 @@ onready var ai_card_holder = $AICardHolder
 onready var table_card_holder = $TableCardHolder
 onready var player_turn_label = $PlayerTurnIndicator
 onready var ai_turn_label = $AITurnIndicator
+onready var draw_card_button = $TableCardHolder/DrawCardButton
 
 var facing_card_data : CardData
 var facing_card_node : Node
@@ -166,15 +167,27 @@ func handle_ai_turn():
 		draw_deck_card(PlayerType.AI)
 
 func draw_deck_card(player_type):
-	var new_card = all_cards[current_deck_card_index]
-	current_deck_card_index += 1
-	if(player_type == PlayerType.SELF):
-		var new_card_node = card_generator.generate_cards([new_card], player_card_holder, true)[0]
-		player_cards_nodes.append(new_card_node)
+	if(check_deck_size()):
+		var new_card = all_cards[current_deck_card_index]
+		current_deck_card_index += 1
+		update_deck_visibility()
+		if(player_type == PlayerType.SELF):
+			var new_card_node = card_generator.generate_cards([new_card], player_card_holder, true)[0]
+			player_cards_nodes.append(new_card_node)
+		else:
+			var new_card_node = card_generator.generate_cards([new_card], ai_card_holder)[0]
+			ai_cards_nodes.append(new_card_node)
+		handle_turn_update()
 	else:
-		var new_card_node = card_generator.generate_cards([new_card], ai_card_holder)[0]
-		ai_cards_nodes.append(new_card_node)
-	handle_turn_update()
+		print("No Deck cards! All finished!")
+		
+func check_deck_size():
+	return current_deck_card_index < all_cards.size()
+		
+func update_deck_visibility():
+	if(!check_deck_size()):
+		draw_card_button.self_modulate = Color(1.0, 1.0, 1.0, 0.25)
+		pass
 
 func _on_DrawCardButton_button_down():
 	draw_deck_card(PlayerType.SELF)
