@@ -132,7 +132,16 @@ func update_inhand_cards(picked_card, player_type):
 		if(is_number_match && is_type_match && is_color_match):
 			inhand_cards.erase(card_node)
 			card_node.queue_free()
+			check_game_over(player_type)
 			break
+
+func check_game_over(player_type):
+	if(player_type == PlayerType.SELF && player_cards_nodes.size() == 0):
+		print("Game Over! = PLAYER WON")
+		set_game_state(GameState.OVER)	
+	elif(player_type == PlayerType.AI && ai_cards_nodes.size() == 0):
+		print("Game Over! = AI WON")
+		set_game_state(GameState.OVER)
 	
 func update_facing_card(new_card:CardData):
 	facing_card_data = new_card
@@ -143,13 +152,14 @@ func update_facing_card(new_card:CardData):
 
 func handle_turn_update():
 	print("Updating turn")
-	var new_turn_state = TurnState.AI_PICK if (current_turn_state == TurnState.PLAYER_PICK) else TurnState.PLAYER_PICK
-	set_turn_state(new_turn_state)
-	print("Turn switched, new turn state = ", current_turn_state)
-	if(current_turn_state == TurnState.AI_PICK):
-		yield(get_tree().create_timer(1.0), "timeout")
-		print("1 second has passed. Continuing with AI turn.")
-		handle_ai_turn()
+	if(current_state == GameState.PLAY):
+		var new_turn_state = TurnState.AI_PICK if (current_turn_state == TurnState.PLAYER_PICK) else TurnState.PLAYER_PICK
+		set_turn_state(new_turn_state)
+		print("Turn switched, new turn state = ", current_turn_state)
+		if(current_turn_state == TurnState.AI_PICK):
+			yield(get_tree().create_timer(1.0), "timeout")
+			print("1 second has passed. Continuing with AI turn.")
+			handle_ai_turn()
 
 func handle_ai_turn():
 	print("Handling AI turn")
@@ -190,4 +200,5 @@ func update_deck_visibility():
 		pass
 
 func _on_DrawCardButton_button_down():
-	draw_deck_card(PlayerType.SELF)
+	if(current_turn_state == TurnState.PLAYER_PICK):
+		draw_deck_card(PlayerType.SELF)
