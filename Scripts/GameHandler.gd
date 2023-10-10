@@ -24,7 +24,7 @@ onready var ai_card_holder = $AICardHolder
 onready var table_card_holder = $TableCardHolder
 onready var player_turn_label = $PlayerTurnIndicator
 onready var ai_turn_label = $AITurnIndicator
-onready var draw_card_button = $TableCardHolder/DrawCardButton
+onready var draw_card_button = $DrawCardButton
 
 var facing_card_data : CardData
 var facing_card_node : Node
