@@ -14,7 +14,7 @@ dest_files=[ "res://.import/blue_card.png-f22069ba093ce1aa1e94a0449cd40145.stex"
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

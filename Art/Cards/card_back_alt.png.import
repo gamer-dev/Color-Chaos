@@ -14,7 +14,7 @@ dest_files=[ "res://.import/card_back_alt.png-2fec04e8293ba3b3e7f4cbbf0dd021b0.s
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

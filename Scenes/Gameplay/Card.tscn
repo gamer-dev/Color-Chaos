@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Card/BaseCard.gd" type="Script" id=1]
-[ext_resource path="res://Art/UI/circle.png" type="Texture" id=2]
+[ext_resource path="res://Art/Cards/Icons/placeholder.png" type="Texture" id=2]
 [ext_resource path="res://Art/Cards/empty_card.png" type="Texture" id=3]
 [ext_resource path="res://Resources/fonts/card_font.tres" type="DynamicFont" id=4]
 
@@ -49,10 +49,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -32.0
 margin_top = -32.0
-margin_right = 224.0
-margin_bottom = 224.0
+margin_right = 32.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 10, 10 )
-rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Button" type="Button" parent="."]

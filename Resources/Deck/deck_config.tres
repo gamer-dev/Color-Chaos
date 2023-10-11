@@ -9,4 +9,4 @@ start_number = 0
 end_number = 9
 card_colors = [ 0, 1, 2, 3 ]
 special_color_cards = [ 3 ]
-special_cards = [ 4 ]
+special_cards = [ 5 ]

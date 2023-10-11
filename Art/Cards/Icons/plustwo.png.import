@@ -2,19 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/yellow_card.png-2ead9bb40db5c6343f6c04e23d0f5b75.stex"
+path="res://.import/plustwo.png-6a644013858dcff2c042d7c1579a2b4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Cards/yellow_card.png"
-dest_files=[ "res://.import/yellow_card.png-2ead9bb40db5c6343f6c04e23d0f5b75.stex" ]
+source_file="res://Art/Cards/Icons/plustwo.png"
+dest_files=[ "res://.import/plustwo.png-6a644013858dcff2c042d7c1579a2b4d.stex" ]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

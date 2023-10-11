@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Config/CardArtData.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Deck/DeckConfigurator.gd" type="Script" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://Art/Cards/blue_card.png" type="Texture" id=5]
 [ext_resource path="res://Art/Cards/red_card.png" type="Texture" id=6]
 [ext_resource path="res://Art/Cards/yellow_card.png" type="Texture" id=7]
-[ext_resource path="res://Art/UI/heartIcon.png" type="Texture" id=8]
+[ext_resource path="res://Art/Cards/Icons/add-four.png" type="Texture" id=8]
 [ext_resource path="res://Art/Cards/empty_card.png" type="Texture" id=9]
+[ext_resource path="res://Art/Cards/Icons/plustwo.png" type="Texture" id=10]
+[ext_resource path="res://Art/Cards/Icons/fast-forward.png" type="Texture" id=11]
+[ext_resource path="res://Art/Cards/Icons/color-switch.png" type="Texture" id=12]
 
 [node name="DeckConfigurator" type="Node"]
 script = ExtResource( 2 )
@@ -22,10 +25,10 @@ __meta__ = {
 "_editor_description_": "Modify this to control the cards art data. Please refer to the CardArtResource to get info on the names of the textures."
 }
 card_icons = {
-2: ExtResource( 8 ),
-3: ExtResource( 8 ),
+2: ExtResource( 11 ),
+3: ExtResource( 10 ),
 4: ExtResource( 8 ),
-5: ExtResource( 8 )
+5: ExtResource( 12 )
 }
 color_cards_sprites = {
 0: ExtResource( 6 ),
