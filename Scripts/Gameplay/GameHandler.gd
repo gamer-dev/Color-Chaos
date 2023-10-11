@@ -53,9 +53,11 @@ func set_turn_state(new_turn_state):
 	if(current_turn_state == TurnState.PLAYER_PICK):
 		player_turn_label.visible =true
 		ai_turn_label.visible = false
+		tween_alpha(player_turn_label)
 	else:
 		player_turn_label.visible = false
 		ai_turn_label.visible = true
+		tween_alpha(ai_turn_label)
 
 func setup_cards():
 	all_cards = deck_configurator.generate_deck()
@@ -202,3 +204,11 @@ func update_deck_visibility():
 func _on_DrawCardButton_button_down():
 	if(current_turn_state == TurnState.PLAYER_PICK):
 		draw_deck_card(PlayerType.SELF)
+		
+func tween_alpha(node):
+	var tween = $Tween
+	tween.stop_all()
+	tween.interpolate_property(node, "modulate:a", 1.0, 0.25, 1.5 , Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+	tween.set_repeat(true)
+	tween.start()
+	#tween.interpolate_method(player_turn_label, "set_position", Vector2.ZERO, size, 2, current_trans, current_ease)
