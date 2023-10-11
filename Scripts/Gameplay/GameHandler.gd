@@ -13,8 +13,8 @@ enum TurnState{
 }
 
 enum PlayerType{
-	SELF,
-	AI
+	SELF = 0 ,
+	AI = 1
 }
 
 onready var card_generator = $CardsGenerator
@@ -114,10 +114,58 @@ func handle_card_play(picked_card:Node, player_type):
 	var picked_card_data:CardData = picked_card.this_card_data
 	update_facing_card(picked_card_data)
 	update_inhand_cards(picked_card, player_type)
+	var is_special = process_special_card(picked_card.this_card_data, player_type)
 	#switch turn
-	handle_turn_update()
-	pass
+	if(!is_special):
+		 handle_turn_update()
 	
+func process_special_card(card_data:CardData, player_type):
+	var card_type = card_data.card_type 
+	if(card_type != CardData.CardType.NONE && card_type != CardData.CardType.NUMBER):
+		#we have a special card, handle it:
+		match card_type:
+			CardData.CardType.PLUS_2:
+				handle_plus_two_played(player_type)
+			CardData.CardType.TURN_JUMP:
+				#TODO
+				pass
+		return true
+	else:
+		return false
+
+func handle_plus_two_played(player_type):
+	var add_cards_to = TurnState.AI_PICK if (player_type == TurnState.PLAYER_PICK) else TurnState.PLAYER_PICK
+	print("Adding card to = ", add_cards_to)
+	draw_deck_card(add_cards_to, 2)
+	
+func draw_deck_card(player_type, num_cards_to_draw = 1):
+	if check_deck_size() and num_cards_to_draw > 0:
+		var drawn_cards = []
+		for i in range(num_cards_to_draw):
+			if(check_deck_size()):
+				var new_card = all_cards[current_deck_card_index]
+				current_deck_card_index += 1
+				drawn_cards.append(new_card)
+		update_deck_visibility()
+		if player_type == PlayerType.SELF:
+			var new_card_nodes = card_generator.generate_cards(drawn_cards, player_card_holder, true)
+			player_cards_nodes += new_card_nodes
+		else:
+			var new_card_nodes = card_generator.generate_cards(drawn_cards, ai_card_holder)
+			ai_cards_nodes += new_card_nodes
+
+		handle_turn_update()
+	else:
+		print("No Deck cards or invalid number of cards to draw! All finished!")
+	
+func check_deck_size():
+	return current_deck_card_index < all_cards.size()
+	
+func update_deck_visibility():
+	if(!check_deck_size()):
+		draw_card_button.self_modulate = Color(1.0, 1.0, 1.0, 0.25)
+		pass
+
 func update_inhand_cards(picked_card, player_type):
 	var inhand_cards = player_cards_nodes if (player_type == PlayerType.SELF) else ai_cards_nodes
 	
@@ -126,7 +174,7 @@ func update_inhand_cards(picked_card, player_type):
 	else:
 		inhand_cards = ai_cards_nodes
 	
-	for card_node in inhand_cards:
+	for card_node in inhand_cards: 
 		var is_color_match = card_node.this_card_data.color == picked_card.this_card_data.color
 		var is_type_match = card_node.this_card_data.card_type == picked_card.this_card_data.card_type
 		var is_number_match = card_node.this_card_data.number == picked_card.this_card_data.number
@@ -178,33 +226,10 @@ func handle_ai_turn():
 	if(!did_play_card):
 		draw_deck_card(PlayerType.AI)
 
-func draw_deck_card(player_type):
-	if(check_deck_size()):
-		var new_card = all_cards[current_deck_card_index]
-		current_deck_card_index += 1
-		update_deck_visibility()
-		if(player_type == PlayerType.SELF):
-			var new_card_node = card_generator.generate_cards([new_card], player_card_holder, true)[0]
-			player_cards_nodes.append(new_card_node)
-		else:
-			var new_card_node = card_generator.generate_cards([new_card], ai_card_holder)[0]
-			ai_cards_nodes.append(new_card_node)
-		handle_turn_update()
-	else:
-		print("No Deck cards! All finished!")
-		
-func check_deck_size():
-	return current_deck_card_index < all_cards.size()
-		
-func update_deck_visibility():
-	if(!check_deck_size()):
-		draw_card_button.self_modulate = Color(1.0, 1.0, 1.0, 0.25)
-		pass
-
 func _on_DrawCardButton_button_down():
 	if(current_turn_state == TurnState.PLAYER_PICK):
 		draw_deck_card(PlayerType.SELF)
-		
+
 func tween_alpha(node):
 	var tween = $Tween
 	tween.stop_all()

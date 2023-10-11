@@ -5,7 +5,7 @@ extends Node
 enum CardType {
 	NONE = 0
 	NUMBER = 1,
-	SKIP_CARD = 2,
+	TURN_JUMP = 2,
 	PLUS_2 = 3,
 	PLUS_4 = 4,
 	COLOR_SWITCH = 5
