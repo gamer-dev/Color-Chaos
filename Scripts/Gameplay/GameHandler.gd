@@ -25,6 +25,7 @@ onready var table_card_holder = $TableCardHolder
 onready var player_turn_label = $PlayerTurnIndicator
 onready var ai_turn_label = $AITurnIndicator
 onready var draw_card_button = $DrawCardButton
+onready var game_over_panel: Node = $GameOverPanel
 
 var facing_card_data : CardData
 var facing_card_node : Node
@@ -42,6 +43,7 @@ func _ready():
 	start_game()
 
 func start_game():
+	game_over_panel.visible = false
 	set_game_state(GameState.PLAY)
 	setup_cards()
 
@@ -188,10 +190,14 @@ func update_inhand_cards(picked_card, player_type):
 func check_game_over(player_type):
 	if(player_type == PlayerType.SELF && player_cards_nodes.size() == 0):
 		print("Game Over! = PLAYER WON")
-		set_game_state(GameState.OVER)	
+		set_game_over()
 	elif(player_type == PlayerType.AI && ai_cards_nodes.size() == 0):
 		print("Game Over! = AI WON")
-		set_game_state(GameState.OVER)
+		set_game_over()
+		
+func set_game_over():
+	set_game_state(GameState.OVER)
+	game_over_panel.visible = true
 	
 func update_facing_card(new_card:CardData):
 	facing_card_data = new_card
@@ -237,3 +243,6 @@ func tween_alpha(node):
 	tween.set_repeat(true)
 	tween.start()
 	#tween.interpolate_method(player_turn_label, "set_position", Vector2.ZERO, size, 2, current_trans, current_ease)
+
+func reload_main_scene():
+	get_tree().reload_current_scene()
