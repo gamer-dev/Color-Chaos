@@ -12,27 +12,27 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BaseCard",
 "language": "GDScript",
-"path": "res://Scripts/BaseCard.gd"
+"path": "res://Scripts/Card/BaseCard.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "CardArtData",
 "language": "GDScript",
-"path": "res://Scripts/CardArtData.gd"
+"path": "res://Scripts/Card/CardArtData.gd"
 }, {
 "base": "Node",
 "class": "CardData",
 "language": "GDScript",
-"path": "res://Scripts/CardData.gd"
+"path": "res://Scripts/Card/CardData.gd"
 }, {
 "base": "Resource",
 "class": "DeckConfigurationResoure",
 "language": "GDScript",
-"path": "res://Scripts/DeckConfigurationResource.gd"
+"path": "res://Scripts/Deck/DeckConfigurationResource.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "DeckConfigurator",
 "language": "GDScript",
-"path": "res://Scripts/DeckConfigurator.gd"
+"path": "res://Scripts/Deck/DeckConfigurator.gd"
 } ]
 _global_script_class_icons={
 "BaseCard": "",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ColorChaos"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/_Main/Game.tscn"
 config/icon="res://icon.png"
 
 [display]

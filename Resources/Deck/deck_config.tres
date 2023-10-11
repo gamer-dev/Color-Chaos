@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Deck/DeckConfigurationResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+cards_to_deal = 7
+start_number = 0
+end_number = 9
+card_colors = [ 0, 1, 2, 3 ]
+special_color_cards = [ 3 ]
+special_cards = [ 4 ]
