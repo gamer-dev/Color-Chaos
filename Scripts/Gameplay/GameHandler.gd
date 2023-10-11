@@ -76,7 +76,7 @@ func setup_cards():
 		current_deck_card_index + deck_configurator.deck_data.cards_to_deal-1
 	)
 	current_deck_card_index += deck_configurator.deck_data.cards_to_deal
-	ai_cards_nodes = card_generator.generate_cards(cards_for_ai, ai_card_holder)
+	ai_cards_nodes = card_generator.generate_cards(cards_for_ai, ai_card_holder, false, true)
 	
 	var new_facing_card = all_cards[current_deck_card_index]
 	update_facing_card(new_facing_card)
@@ -151,7 +151,7 @@ func draw_deck_card(player_type, num_cards_to_draw = 1):
 			var new_card_nodes = card_generator.generate_cards(drawn_cards, player_card_holder, true)
 			player_cards_nodes += new_card_nodes
 		else:
-			var new_card_nodes = card_generator.generate_cards(drawn_cards, ai_card_holder)
+			var new_card_nodes = card_generator.generate_cards(drawn_cards, ai_card_holder, false, true)
 			ai_cards_nodes += new_card_nodes
 
 		handle_turn_update()
@@ -198,7 +198,7 @@ func update_facing_card(new_card:CardData):
 	if(facing_card_node!=null):
 		facing_card_node.queue_free()
 	facing_card_node = null
-	facing_card_node = card_generator.generate_cards([new_card], table_card_holder)[0]
+	facing_card_node = card_generator.generate_cards([new_card], table_card_holder, false, false)[0]
 
 func handle_turn_update():
 	print("Updating turn")

@@ -9,26 +9,28 @@ var this_card_data: CardData
 onready var card_texture: TextureRect = $Texture
 onready var card_icon : TextureRect = $Icon
 onready var card_num_label : Label = $Number
+onready var card_back_texture : TextureRect = $CardBack
 
 var is_player_card: bool = true
 
 func get_card_data():
 	return this_card_data
 
-func set_card_data(card_data_val:CardData, is_player = false):
+func set_card_data(card_data_val:CardData, is_player = false, show_back = false):
 	this_card_data = card_data_val
 	is_player_card = is_player
-	set_visuals()
+	set_visuals(show_back)
 
-func set_visuals():
-	set_texture()
+func set_visuals(show_back:bool):
+	set_card_texture(show_back)
 	set_icon()
 	set_number()
 	pass
 	
-func set_texture():
+func set_card_texture(show_back:bool):
 	card_texture.texture = this_card_data.texture
-	pass
+	if(!is_player_card):
+		card_back_texture.visible = show_back
 	
 func set_icon():
 	if is_instance_valid(this_card_data.icon):
