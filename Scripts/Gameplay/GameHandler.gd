@@ -88,10 +88,8 @@ func setup_cards():
 	
 func handle_card_selected(selected_card:Node):
 	var selected_card_data = selected_card.this_card_data
-	print("Card Data got = " , selected_card_data.card_type)
 	if(current_turn_state == TurnState.PLAYER_PICK):
 		var can_pick = is_picked_card_valid(selected_card_data)
-		print("Card can be picked? = ",can_pick)
 		if(can_pick):
 			handle_card_play(selected_card, PlayerType.SELF)
 
@@ -136,8 +134,7 @@ func process_special_card(card_data:CardData, player_type):
 		return false
 
 func handle_plus_two_played(player_type):
-	var add_cards_to = TurnState.AI_PICK if (player_type == TurnState.PLAYER_PICK) else TurnState.PLAYER_PICK
-	print("Adding card to = ", add_cards_to)
+	var add_cards_to = PlayerType.AI if (player_type == PlayerType.SELF) else PlayerType.SELF
 	draw_deck_card(add_cards_to, 2)
 	
 func draw_deck_card(player_type, num_cards_to_draw = 1):
@@ -189,10 +186,8 @@ func update_inhand_cards(picked_card, player_type):
 
 func check_game_over(player_type):
 	if(player_type == PlayerType.SELF && player_cards_nodes.size() == 0):
-		print("Game Over! = PLAYER WON")
 		set_game_over()
 	elif(player_type == PlayerType.AI && ai_cards_nodes.size() == 0):
-		print("Game Over! = AI WON")
 		set_game_over()
 		
 func set_game_over():
@@ -207,18 +202,14 @@ func update_facing_card(new_card:CardData):
 	facing_card_node = card_generator.generate_cards([new_card], table_card_holder, false, false)[0]
 
 func handle_turn_update():
-	print("Updating turn")
 	if(current_state == GameState.PLAY):
 		var new_turn_state = TurnState.AI_PICK if (current_turn_state == TurnState.PLAYER_PICK) else TurnState.PLAYER_PICK
 		set_turn_state(new_turn_state)
-		print("Turn switched, new turn state = ", current_turn_state)
 		if(current_turn_state == TurnState.AI_PICK):
 			yield(get_tree().create_timer(1.0), "timeout")
-			print("1 second has passed. Continuing with AI turn.")
 			handle_ai_turn()
 
 func handle_ai_turn():
-	print("Handling AI turn")
 	#check if there is an eligible card or not
 	#if eligible card, play and update turn
 	var did_play_card = false
